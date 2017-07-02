@@ -3,12 +3,10 @@ package com.playground.android_architect_playground.logger;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.playground.android_architect_playground.database.AppDatabase;
+import com.playground.android_architect_playground.database.dao.LogDao;
 import com.playground.android_architect_playground.database.entitiy.LogRecord;
 
 import java.util.concurrent.Callable;
@@ -27,12 +25,11 @@ public class LogLifecycleObserver implements LifecycleObserver {
 
     private String className;
 
-    private AppDatabase database;
+    private LogDao logDao;
 
-    public LogLifecycleObserver(Class clazz, Context context) {
+    public LogLifecycleObserver(Class clazz, LogDao logDao) {
         className = clazz.getSimpleName();
-        database = Room.databaseBuilder(context.getApplicationContext(),
-                AppDatabase.class, AppDatabase.DATABASE_NAME).build();
+        this.logDao = logDao;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -87,7 +84,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
         Single.fromCallable(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                database.logDao().save(log);
+                logDao.save(log);
                 return new Object();
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
