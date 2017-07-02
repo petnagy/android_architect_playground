@@ -5,7 +5,9 @@ import android.arch.lifecycle.LifecycleRegistry;
 import com.playground.android_architect_playground.database.dao.LogDao;
 import com.playground.android_architect_playground.inject.PerActivity;
 import com.playground.android_architect_playground.logger.LogLifecycleObserver;
-import com.playground.android_architect_playground.pages.MainActivity;
+import com.playground.android_architect_playground.pages.mainpage.MainActivity;
+import com.playground.android_architect_playground.pages.mainpage.view.MainActivityView;
+import com.playground.android_architect_playground.pages.mainpage.view.MainActivityViewImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -28,4 +30,9 @@ public class MainActivityModule {
         return new LogLifecycleObserver(MainActivity.class, logDao);
     }
 
+    @PerActivity
+    @Provides
+    MainActivityView provideMainActivityView(MainActivity mainActivity) {
+        return new MainActivityViewImpl(mainActivity);
+    }
 }

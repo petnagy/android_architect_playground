@@ -1,7 +1,7 @@
 package com.playground.android_architect_playground.inject.modules;
 
 import com.playground.android_architect_playground.inject.PerActivity;
-import com.playground.android_architect_playground.pages.MainActivity;
+import com.playground.android_architect_playground.pages.mainpage.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
