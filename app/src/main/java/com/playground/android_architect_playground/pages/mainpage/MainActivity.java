@@ -2,11 +2,13 @@ package com.playground.android_architect_playground.pages.mainpage;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.playground.android_architect_playground.R;
 import com.playground.android_architect_playground.logger.LogLifecycleObserver;
+import com.playground.android_architect_playground.pages.logdetailspage.LogDetailsActivity;
 import com.playground.android_architect_playground.pages.mainpage.view.MainActivityCallback;
 import com.playground.android_architect_playground.pages.mainpage.view.MainActivityView;
 
@@ -52,6 +54,8 @@ public class MainActivity extends DaggerAppCompatActivity implements LifecycleRe
 
     @Override
     public void onNextPageButtonPressed() {
-        Log.d("Callback", "pressed");
+        Log.d("MainActivity", "Go Details Page Pressed");
+        Intent intent = LogDetailsActivity.launchIntent(this);
+        startActivity(intent);
     }
 }

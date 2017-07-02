@@ -30,9 +30,8 @@ public class LogRecord {
     }
 
     @Ignore
-    public LogRecord(long timeStamp, String logMessage, String event) {
-        this.timeStamp = timeStamp;
-        Date date = new Date(timeStamp);
+    public LogRecord(Date date, String logMessage, String event) {
+        this.timeStamp = date.getTime();
         formattedDate = FormattedDateConverter.toFormattedString(date);
         this.logMessage = logMessage;
         this.event = event;

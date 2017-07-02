@@ -3,12 +3,12 @@ package com.playground.android_architect_playground.logger;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.playground.android_architect_playground.database.dao.LogDao;
 import com.playground.android_architect_playground.database.entitiy.LogRecord;
 
+import java.util.Date;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Single;
@@ -36,7 +36,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
     public void onCreate() {
         String logMessage = className + " was created";
         Log.d(TAG, logMessage);
-        LogRecord log = new LogRecord(SystemClock.currentThreadTimeMillis(), logMessage, Lifecycle.Event.ON_CREATE.name());
+        LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_CREATE.name());
         saveInDatabase(log);
     }
 
@@ -44,7 +44,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
     public void onStart() {
         String logMessage = className + " was started";
         Log.d(TAG, logMessage);
-        LogRecord log = new LogRecord(SystemClock.currentThreadTimeMillis(), logMessage, Lifecycle.Event.ON_START.name());
+        LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_START.name());
         saveInDatabase(log);
     }
 
@@ -52,7 +52,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
     public void onResume() {
         String logMessage = className + " was resumed";
         Log.d(TAG, logMessage);
-        LogRecord log = new LogRecord(SystemClock.currentThreadTimeMillis(), logMessage, Lifecycle.Event.ON_RESUME.name());
+        LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_RESUME.name());
         saveInDatabase(log);
     }
 
@@ -60,7 +60,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
     public void onPause() {
         String logMessage = className + " was paused";
         Log.d(TAG, logMessage);
-        LogRecord log = new LogRecord(SystemClock.currentThreadTimeMillis(), logMessage, Lifecycle.Event.ON_PAUSE.name());
+        LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_PAUSE.name());
         saveInDatabase(log);
     }
 
@@ -68,7 +68,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
     public void onStop() {
         final String logMessage = className + " was stopped";
         Log.d(TAG, logMessage);
-        LogRecord log = new LogRecord(SystemClock.currentThreadTimeMillis(), logMessage, Lifecycle.Event.ON_STOP.name());
+        LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_STOP.name());
         saveInDatabase(log);
     }
 
@@ -76,7 +76,7 @@ public class LogLifecycleObserver implements LifecycleObserver {
     public void onDestroy() {
         String logMessage = className + " was destoryed";
         Log.d(TAG, logMessage);
-        LogRecord log = new LogRecord(SystemClock.currentThreadTimeMillis(), logMessage, Lifecycle.Event.ON_DESTROY.name());
+        LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_DESTROY.name());
         saveInDatabase(log);
     }
 
