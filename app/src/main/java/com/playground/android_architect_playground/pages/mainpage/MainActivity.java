@@ -31,20 +31,8 @@ public class MainActivity extends DaggerAppCompatActivity implements LifecycleRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         getLifecycle().addObserver(view);
         getLifecycle().addObserver(logger);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getLifecycle().removeObserver(logger);
-        getLifecycle().removeObserver(view);
     }
 
     @Override

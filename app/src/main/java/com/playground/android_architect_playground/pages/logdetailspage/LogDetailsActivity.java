@@ -2,14 +2,19 @@ package com.playground.android_architect_playground.pages.logdetailspage;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.playground.android_architect_playground.R;
 import com.playground.android_architect_playground.database.dao.LogDao;
 import com.playground.android_architect_playground.database.entitiy.LogRecord;
 import com.playground.android_architect_playground.logger.LogLifecycleObserver;
+import com.playground.android_architect_playground.pages.logdetailspage.model.LogDetailViewModel;
 import com.playground.android_architect_playground.pages.logdetailspage.presenter.LogDetailsPresenter;
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsCallback;
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsView;
@@ -47,15 +52,12 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
     @Inject
     LogDao logDao;
 
+    private LogDetailViewModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_details_activity);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         getLifecycle().addObserver(view);
         getLifecycle().addObserver(logger);
     }
@@ -63,31 +65,14 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
     @Override
     protected void onResume() {
         super.onResume();
-        Single.fromCallable(new Callable<List<LogRecord>>() {
+        model = ViewModelProviders.of(this).get(LogDetailViewModel.class);
+        model.getLogRecords(logDao).observe(this, new Observer<List<LogRecord>>() {
             @Override
-            public List<LogRecord> call() throws Exception {
-                return logDao.loadAllLogs();
+            public void onChanged(@Nullable List<LogRecord> logRecords) {
+                presenter.showLogRecords(logRecords);
+                Log.d("Logger", "load data from model");
             }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new DisposableSingleObserver<List<LogRecord>>() {
-                    @Override
-                    public void onSuccess(@NonNull List<LogRecord> logRecords) {
-                        presenter.showLogRecords(logRecords);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getLifecycle().removeObserver(logger);
-        getLifecycle().removeObserver(view);
+        });
     }
 
     @Override
@@ -101,23 +86,6 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
 
     @Override
     public void onFilterChanged(final String filter) {
-        Single.fromCallable(new Callable<List<LogRecord>>() {
-            @Override
-            public List<LogRecord> call() throws Exception {
-                return logDao.loadLogsByFilter(filter);
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new DisposableSingleObserver<List<LogRecord>>() {
-                    @Override
-                    public void onSuccess(@NonNull List<LogRecord> logRecords) {
-                        presenter.showLogRecords(logRecords);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
+        model.setFilterValue(filter, logDao);
     }
 }
