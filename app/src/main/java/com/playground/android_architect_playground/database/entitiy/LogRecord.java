@@ -5,14 +5,14 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-import com.playground.android_architect_playground.database.FormattedDateConverter;
+import com.playground.android_architect_playground.util.DateUtil;
 
 import java.util.Date;
 
 /**
  * Created by petnagy on 2017. 07. 01..
  */
-@Entity(tableName = "logs", indices = {@Index(value = "event")})
+@Entity(tableName = "logs", indices = {@Index(value = "event"), @Index(value = "logMessage")})
 public class LogRecord {
 
     @PrimaryKey(autoGenerate = true)
@@ -32,7 +32,7 @@ public class LogRecord {
     @Ignore
     public LogRecord(Date date, String logMessage, String event) {
         this.timeStamp = date.getTime();
-        formattedDate = FormattedDateConverter.toFormattedString(date);
+        formattedDate = DateUtil.toFormattedString(date);
         this.logMessage = logMessage;
         this.event = event;
     }

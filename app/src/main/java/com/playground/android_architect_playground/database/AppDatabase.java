@@ -11,7 +11,6 @@ import com.playground.android_architect_playground.database.dao.LogDao;
  * Created by petnagy on 2017. 07. 01..
  */
 @Database(entities = {LogRecord.class}, version = 1)
-@TypeConverters(FormattedDateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "log_database";

@@ -11,6 +11,7 @@ import com.playground.android_architect_playground.database.dao.LogDao;
 import com.playground.android_architect_playground.database.entitiy.LogRecord;
 import com.playground.android_architect_playground.logger.LogLifecycleObserver;
 import com.playground.android_architect_playground.pages.logdetailspage.presenter.LogDetailsPresenter;
+import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsCallback;
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsView;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by petnagy on 2017. 07. 02..
  */
 
-public class LogDetailsActivity extends DaggerAppCompatActivity implements LifecycleRegistryOwner {
+public class LogDetailsActivity extends DaggerAppCompatActivity implements LifecycleRegistryOwner, LogDetailsCallback {
 
     @Inject
     LogLifecycleObserver logger;
@@ -65,7 +66,7 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
         Single.fromCallable(new Callable<List<LogRecord>>() {
             @Override
             public List<LogRecord> call() throws Exception {
-                return logDao.loadLogs();
+                return logDao.loadAllLogs();
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -96,5 +97,27 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
 
     public static Intent launchIntent(Context context) {
         return new Intent(context, LogDetailsActivity.class);
+    }
+
+    @Override
+    public void onFilterChanged(final String filter) {
+        Single.fromCallable(new Callable<List<LogRecord>>() {
+            @Override
+            public List<LogRecord> call() throws Exception {
+                return logDao.loadLogsByFilter(filter);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DisposableSingleObserver<List<LogRecord>>() {
+                    @Override
+                    public void onSuccess(@NonNull List<LogRecord> logRecords) {
+                        presenter.showLogRecords(logRecords);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
     }
 }

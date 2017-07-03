@@ -19,5 +19,8 @@ public interface LogDao {
     void save(LogRecord logRecord);
 
     @Query("SELECT * FROM logs ORDER BY id DESC")
-    List<LogRecord> loadLogs();
+    List<LogRecord> loadAllLogs();
+
+    @Query("SELECT * FROM logs WHERE logMessage LIKE '%' || :filter || '%' ORDER BY id DESC")
+    List<LogRecord> loadLogsByFilter(String filter);
 }

@@ -5,6 +5,10 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.playground.android_architect_playground.R;
 import com.playground.android_architect_playground.database.entitiy.LogRecord;
@@ -24,22 +28,38 @@ public class LogDetailsViewImpl implements LogDetailsView {
 
     private LogDetailAdapter adapter;
 
+    private ProgressBar progressBar;
+
+    private LogDetailsCallback callback;
+
     public LogDetailsViewImpl(Activity activity) {
         this.activity = activity;
+        this.callback = (LogDetailsCallback) activity;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     @Override
     public void onCreate() {
         RecyclerView list = activity.findViewById(R.id.logList);
+        progressBar = activity.findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
         adapter = new LogDetailAdapter(Collections.<LogRecord>emptyList());
         list.setLayoutManager(new GridLayoutManager(activity, 1));
         list.addItemDecoration(new SpaceItemDecor(8));
         list.setAdapter(adapter);
+        final EditText filter = activity.findViewById(R.id.filter_value);
+        Button activateFilter = activity.findViewById(R.id.filter_activate_button);
+        activateFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.onFilterChanged(filter.getText().toString());
+            }
+        });
     }
 
     @Override
     public void showLogRecords(List<LogRecord> logRecords) {
         adapter.setLogRecords(logRecords);
+        progressBar.setVisibility(View.GONE);
     }
 }
