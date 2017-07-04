@@ -20,16 +20,10 @@ import com.playground.android_architect_playground.pages.logdetailspage.view.Log
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsView;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by petnagy on 2017. 07. 02..
