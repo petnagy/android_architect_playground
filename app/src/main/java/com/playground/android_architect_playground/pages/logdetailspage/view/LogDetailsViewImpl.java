@@ -32,6 +32,10 @@ public class LogDetailsViewImpl implements LogDetailsView {
 
     private LogDetailsCallback callback;
 
+    private Button activateFilter;
+
+    private EditText filter;
+
     public LogDetailsViewImpl(Activity activity) {
         this.activity = activity;
         this.callback = (LogDetailsCallback) activity;
@@ -47,8 +51,8 @@ public class LogDetailsViewImpl implements LogDetailsView {
         list.setLayoutManager(new GridLayoutManager(activity, 1));
         list.addItemDecoration(new SpaceItemDecor(8));
         list.setAdapter(adapter);
-        final EditText filter = activity.findViewById(R.id.filter_value);
-        Button activateFilter = activity.findViewById(R.id.filter_activate_button);
+        filter = activity.findViewById(R.id.filter_value);
+        activateFilter = activity.findViewById(R.id.filter_activate_button);
         activateFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,5 +65,14 @@ public class LogDetailsViewImpl implements LogDetailsView {
     public void showLogRecords(List<LogRecord> logRecords) {
         adapter.setLogRecords(logRecords);
         progressBar.setVisibility(View.GONE);
+        activateFilter.setEnabled(true);
+        filter.setEnabled(true);
+    }
+
+    @Override
+    public void showLoadingProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        activateFilter.setEnabled(false);
+        filter.setEnabled(false);
     }
 }

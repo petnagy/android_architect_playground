@@ -59,6 +59,7 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.displayLoadingProgress();
         model = ViewModelProviders.of(this).get(LogDetailViewModel.class);
         model.getLogRecords(logDao).observe(this, new Observer<List<LogRecord>>() {
             @Override
@@ -80,6 +81,7 @@ public class LogDetailsActivity extends DaggerAppCompatActivity implements Lifec
 
     @Override
     public void onFilterChanged(final String filter) {
+        presenter.displayLoadingProgress();
         model.setFilterValue(filter, logDao);
     }
 }

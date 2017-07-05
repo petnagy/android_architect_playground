@@ -52,6 +52,7 @@ public class LogDetailViewModel extends ViewModel {
                 if (filterValue == null) {
                     filterValue = "";
                 }
+                Thread.sleep(5000);
                 return logDao.loadLogsByFilter(filterValue);
             }
         }).observeOn(AndroidSchedulers.mainThread())

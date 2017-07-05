@@ -22,4 +22,9 @@ public class LogDetailsPresenterImpl implements LogDetailsPresenter {
     public void showLogRecords(List<LogRecord> logRecords) {
         view.showLogRecords(logRecords);
     }
+
+    @Override
+    public void displayLoadingProgress() {
+        view.showLoadingProgress();
+    }
 }

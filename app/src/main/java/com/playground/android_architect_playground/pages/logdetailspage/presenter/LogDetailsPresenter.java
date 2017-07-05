@@ -12,4 +12,6 @@ import java.util.List;
 public interface LogDetailsPresenter extends Presenter {
 
     void showLogRecords(List<LogRecord> logRecords);
+
+    void displayLoadingProgress();
 }

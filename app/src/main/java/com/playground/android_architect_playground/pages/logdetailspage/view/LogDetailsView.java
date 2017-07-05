@@ -13,4 +13,5 @@ public interface LogDetailsView extends View {
 
     void showLogRecords(List<LogRecord> logRecords);
 
+    void showLoadingProgress();
 }
