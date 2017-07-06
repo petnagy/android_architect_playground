@@ -33,5 +33,13 @@ public class MainActivityViewImpl implements MainActivityView {
                 callback.onNextPageButtonPressed();
             }
         });
+
+        Button btnGoColorPage = activity.findViewById(R.id.colorPage);
+        btnGoColorPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.onColorPageButtonPressed();
+            }
+        });
     }
 }

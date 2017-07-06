@@ -8,4 +8,5 @@ public interface MainActivityCallback {
 
     void onNextPageButtonPressed();
 
+    void onColorPageButtonPressed();
 }

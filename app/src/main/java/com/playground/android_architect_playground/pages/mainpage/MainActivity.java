@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.playground.android_architect_playground.R;
 import com.playground.android_architect_playground.logger.LogLifecycleObserver;
+import com.playground.android_architect_playground.pages.colorpage.ColorActivity;
 import com.playground.android_architect_playground.pages.logdetailspage.LogDetailsActivity;
 import com.playground.android_architect_playground.pages.mainpage.view.MainActivityCallback;
 import com.playground.android_architect_playground.pages.mainpage.view.MainActivityView;
@@ -44,6 +45,13 @@ public class MainActivity extends DaggerAppCompatActivity implements LifecycleRe
     public void onNextPageButtonPressed() {
         Log.d("MainActivity", "Go Details Page Pressed");
         Intent intent = LogDetailsActivity.launchIntent(this);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onColorPageButtonPressed() {
+        Log.d("MainActivity", "Go to Color Page Pressed");
+        Intent intent = ColorActivity.launchIntent(this);
         startActivity(intent);
     }
 }
