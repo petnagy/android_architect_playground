@@ -1,6 +1,5 @@
 package com.playground.android_architect_playground.pages.logdetailspage.presenter;
 
-import com.playground.android_architect_playground.common.view.View;
 import com.playground.android_architect_playground.database.entitiy.LogRecord;
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsView;
 

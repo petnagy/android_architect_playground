@@ -18,7 +18,7 @@ public class LogRecord {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-    private long timeStamp;
+    private Date date;
 
     private String formattedDate;
 
@@ -31,7 +31,7 @@ public class LogRecord {
 
     @Ignore
     public LogRecord(Date date, String logMessage, String event) {
-        this.timeStamp = date.getTime();
+        this.date = date;
         formattedDate = DateUtil.toFormattedString(date);
         this.logMessage = logMessage;
         this.event = event;
@@ -45,12 +45,12 @@ public class LogRecord {
         this.id = id;
     }
 
-    public long getTimeStamp() {
-        return timeStamp;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getFormattedDate() {
