@@ -39,21 +39,12 @@ public class ColorActivity extends DaggerAppCompatActivity implements LifecycleR
         ColorViewModel colorViewModel = ViewModelProviders.of(this).get(ColorViewModel.class);
         colorViewModel.getBaseColor().setValue(ColorEnum.BLUE);
 
-        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-        ft1.replace(R.id.fragment_one_holder, ColorFragment.newInstance(0));
-        ft1.commit();
-
-        FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-        ft2.replace(R.id.fragment_two_holder, ColorFragment.newInstance(1));
-        ft2.commit();
-
-        FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
-        ft3.replace(R.id.fragment_three_holder, ColorFragment.newInstance(3));
-        ft3.commit();
-
-        FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
-        ft4.replace(R.id.fragment_four_holder, ColorFragment.newInstance(2));
-        ft4.commit();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_one_holder, ColorFragment.newInstance(0));
+        fragmentTransaction.replace(R.id.fragment_two_holder, ColorFragment.newInstance(1));
+        fragmentTransaction.replace(R.id.fragment_three_holder, ColorFragment.newInstance(3));
+        fragmentTransaction.replace(R.id.fragment_four_holder, ColorFragment.newInstance(2));
+        fragmentTransaction.commit();
     }
 
     @Override
