@@ -76,4 +76,31 @@ public class LogRecord {
     public void setEvent(String event) {
         this.event = event;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LogRecord logRecord = (LogRecord) o;
+
+        if (id != logRecord.id) return false;
+        if (date != null ? !date.equals(logRecord.date) : logRecord.date != null) return false;
+        if (formattedDate != null ? !formattedDate.equals(logRecord.formattedDate) : logRecord.formattedDate != null)
+            return false;
+        if (logMessage != null ? !logMessage.equals(logRecord.logMessage) : logRecord.logMessage != null)
+            return false;
+        return event != null ? event.equals(logRecord.event) : logRecord.event == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (formattedDate != null ? formattedDate.hashCode() : 0);
+        result = 31 * result + (logMessage != null ? logMessage.hashCode() : 0);
+        result = 31 * result + (event != null ? event.hashCode() : 0);
+        return result;
+    }
 }
