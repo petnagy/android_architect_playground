@@ -5,6 +5,7 @@ import com.playground.android_architect_playground.pages.colorpage.ColorActivity
 import com.playground.android_architect_playground.pages.colorpage.view.ColorFragment;
 import com.playground.android_architect_playground.pages.logdetailspage.LogDetailsActivity;
 import com.playground.android_architect_playground.pages.mainpage.MainActivity;
+import com.playground.android_architect_playground.pages.roomlivedata.RoomLiveDataDemoActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -29,4 +30,8 @@ public abstract class ContributesAndroidInjectorModule {
 
     @ContributesAndroidInjector(modules = {ColorFragmentModule.class})
     public abstract ColorFragment contributeColorFragment();
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = {RoomLiveDataDemoActivityModule.class})
+    public abstract RoomLiveDataDemoActivity contribureRoomLiveDataDemoActivity();
 }

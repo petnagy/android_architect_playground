@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.playground.android_architect_playground.R;
 import com.playground.android_architect_playground.pages.colorpage.ColorActivity;
 import com.playground.android_architect_playground.pages.logdetailspage.LogDetailsActivity;
+import com.playground.android_architect_playground.pages.roomlivedata.RoomLiveDataDemoActivity;
 
 /**
  * Created by petnagy on 2017. 07. 02..
@@ -43,6 +44,16 @@ public class MainActivityViewImpl implements MainActivityView {
             public void onClick(View view) {
                 Log.d("MainActivityViewImpl", "Go to Color Page Pressed");
                 Intent intent = ColorActivity.launchIntent(activity);
+                activity.startActivity(intent);
+            }
+        });
+
+        Button btnRoomLiveData = activity.findViewById(R.id.roomLiveData);
+        btnRoomLiveData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("MainActivityViewImpl", "Go to RoomLiveData");
+                Intent intent = RoomLiveDataDemoActivity.launchIntent(activity);
                 activity.startActivity(intent);
             }
         });

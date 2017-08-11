@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.playground.android_architect_playground.AppProject;
 import com.playground.android_architect_playground.database.dao.LogDao;
+import com.playground.android_architect_playground.database.dao.PlanetsDao;
 import com.playground.android_architect_playground.inject.ApplicationContext;
 import com.playground.android_architect_playground.inject.modules.ApplicationModule;
 import com.playground.android_architect_playground.inject.modules.ContributesAndroidInjectorModule;
@@ -29,4 +30,6 @@ public interface ApplicationComponent extends AndroidInjector<AppProject> {
     Context getContext();
 
     LogDao getLogDao();
+
+    PlanetsDao getPlanetsDao();
 }

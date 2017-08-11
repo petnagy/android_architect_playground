@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".pages.logdetailspage.LogDetailsActivity" />
         <activity android:name=".pages.colorpage.ColorActivity" />
+        <activity android:name=".pages.roomlivedata.RoomLiveDataDemoActivity" />
     </application>
 
 </manifest>

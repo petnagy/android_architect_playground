@@ -36,9 +36,10 @@ public class LogDetailsViewImpl implements LogDetailsView {
 
     private EditText filter;
 
-    public LogDetailsViewImpl(Activity activity) {
+    public LogDetailsViewImpl(Activity activity, LogDetailAdapter adapter) {
         this.activity = activity;
         this.callback = (LogDetailsCallback) activity;
+        this.adapter = adapter;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -47,7 +48,6 @@ public class LogDetailsViewImpl implements LogDetailsView {
         RecyclerView list = activity.findViewById(R.id.logList);
         progressBar = activity.findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
-        adapter = new LogDetailAdapter(Collections.<LogRecord>emptyList());
         list.setLayoutManager(new GridLayoutManager(activity, 1));
         list.addItemDecoration(new SpaceItemDecor(8));
         list.setAdapter(adapter);
