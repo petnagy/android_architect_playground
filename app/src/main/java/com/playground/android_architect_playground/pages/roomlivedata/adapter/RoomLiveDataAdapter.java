@@ -25,13 +25,13 @@ public class RoomLiveDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private DeleteCallback callback;
 
-    public static class RoomLiveDataViewHolder extends RecyclerView.ViewHolder {
+    private static class RoomLiveDataViewHolder extends RecyclerView.ViewHolder {
 
         TextView planetName;
 
         ImageView delete;
 
-        public RoomLiveDataViewHolder(View view) {
+        RoomLiveDataViewHolder(View view) {
             super(view);
             planetName = view.findViewById(R.id.planet_name);
             delete = view.findViewById(R.id.delete_icon);
@@ -76,13 +76,13 @@ public class RoomLiveDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         result.dispatchUpdatesTo(this);
     }
 
-    public static class RecordItemDiffCallback extends DiffUtil.Callback {
+    private static class RecordItemDiffCallback extends DiffUtil.Callback {
 
         private List<RecordItem> oldItems;
 
         private List<RecordItem> newItems;
 
-        public RecordItemDiffCallback(List<RecordItem> oldItems, List<RecordItem> newItems) {
+        RecordItemDiffCallback(List<RecordItem> oldItems, List<RecordItem> newItems) {
             this.oldItems = oldItems;
             this.newItems = newItems;
         }
@@ -114,7 +114,7 @@ public class RoomLiveDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         private DeleteCallback callback;
 
-        public DeleteClickListener(RecordItem item, DeleteCallback callback) {
+        DeleteClickListener(RecordItem item, DeleteCallback callback) {
             this.item = item;
             this.callback = callback;
         }

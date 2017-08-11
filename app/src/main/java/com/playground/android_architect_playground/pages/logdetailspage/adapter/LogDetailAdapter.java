@@ -57,7 +57,7 @@ public class LogDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         result.dispatchUpdatesTo(this);
     }
 
-    public static class LogDetailViewHolder extends RecyclerView.ViewHolder {
+    private static class LogDetailViewHolder extends RecyclerView.ViewHolder {
 
         TextView logFormattedDate;
 
@@ -65,7 +65,7 @@ public class LogDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         TextView logEvent;
 
-        public LogDetailViewHolder(View view) {
+        private LogDetailViewHolder(View view) {
             super(view);
             logFormattedDate = view.findViewById(R.id.log_formatted_date);
             logMessage = view.findViewById(R.id.log_message);
@@ -73,13 +73,13 @@ public class LogDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public static class LogDetailsDiffCallback extends DiffUtil.Callback {
+    private static class LogDetailsDiffCallback extends DiffUtil.Callback {
 
         private List<LogRecord> oldLogs;
 
         private List<LogRecord> newLogs;
 
-        public LogDetailsDiffCallback(List<LogRecord> oldLogs, List<LogRecord> newLogs) {
+        private LogDetailsDiffCallback(List<LogRecord> oldLogs, List<LogRecord> newLogs) {
             this.oldLogs = oldLogs;
             this.newLogs = newLogs;
         }

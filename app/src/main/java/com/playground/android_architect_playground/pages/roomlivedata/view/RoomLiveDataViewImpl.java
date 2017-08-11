@@ -74,7 +74,7 @@ public class RoomLiveDataViewImpl implements RoomLiveDataView, DeleteCallback {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {
+    void onResume() {
         LiveData<List<RecordItem>> records = planetsDao.loadAllRecords();
         records.observe(activity, new Observer<List<RecordItem>>() {
             @Override

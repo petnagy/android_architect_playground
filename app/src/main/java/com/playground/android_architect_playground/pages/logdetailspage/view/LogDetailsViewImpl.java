@@ -15,7 +15,6 @@ import com.playground.android_architect_playground.database.entitiy.LogRecord;
 import com.playground.android_architect_playground.decor.SpaceItemDecor;
 import com.playground.android_architect_playground.pages.logdetailspage.adapter.LogDetailAdapter;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

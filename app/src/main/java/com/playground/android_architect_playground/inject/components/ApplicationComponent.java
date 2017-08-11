@@ -30,6 +30,4 @@ public interface ApplicationComponent extends AndroidInjector<AppProject> {
     Context getContext();
 
     LogDao getLogDao();
-
-    PlanetsDao getPlanetsDao();
 }

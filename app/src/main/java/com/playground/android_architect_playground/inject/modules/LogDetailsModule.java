@@ -12,7 +12,6 @@ import com.playground.android_architect_playground.pages.logdetailspage.presente
 import com.playground.android_architect_playground.pages.logdetailspage.presenter.LogDetailsPresenterImpl;
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsView;
 import com.playground.android_architect_playground.pages.logdetailspage.view.LogDetailsViewImpl;
-import com.playground.android_architect_playground.pages.mainpage.MainActivity;
 
 import java.util.Collections;
 
