@@ -11,8 +11,10 @@ import com.playground.android_architect_playground.database.entitiy.LogRecord;
 import java.util.Date;
 import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -74,18 +76,17 @@ public class LogLifecycleObserver implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
-        String logMessage = className + " was destoryed";
+        String logMessage = className + " was destroyed";
         Log.d(TAG, logMessage);
         LogRecord log = new LogRecord(new Date(), logMessage, Lifecycle.Event.ON_DESTROY.name());
         saveInDatabase(log);
     }
 
     private void saveInDatabase(final LogRecord log) {
-        Single.fromCallable(new Callable<Object>() {
+        Completable.fromAction(new Action() {
             @Override
-            public Object call() throws Exception {
+            public void run() {
                 logDao.save(log);
-                return new Object();
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
     }

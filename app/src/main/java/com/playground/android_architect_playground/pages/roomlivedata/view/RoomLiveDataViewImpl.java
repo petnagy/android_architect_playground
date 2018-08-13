@@ -21,10 +21,10 @@ import com.playground.android_architect_playground.pages.roomlivedata.model.Plan
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Single;
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -90,21 +90,19 @@ public class RoomLiveDataViewImpl implements RoomLiveDataView, DeleteCallback {
     }
 
     private void saveInDatabase(final RecordItem record) {
-        Single.fromCallable(new Callable<Object>() {
+        Completable.fromAction(new Action() {
             @Override
-            public Object call() throws Exception {
+            public void run() {
                 planetsDao.save(record);
-                return new Object();
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 
     private void deleteInDatabase(final RecordItem record) {
-        Single.fromCallable(new Callable<Object>() {
+        Completable.fromAction(new Action() {
             @Override
-            public Object call() throws Exception {
+            public void run() {
                 planetsDao.delete(record);
-                return new Object();
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
