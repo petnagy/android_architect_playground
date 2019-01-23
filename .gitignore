@@ -59,3 +59,4 @@ local.properties
 *.ipr
 *~
 *.swp
+gradle_models.ser
